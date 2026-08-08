@@ -1,4 +1,4 @@
-package enums;
+package meus_lidos_list.enums;
 
 public enum StatusLeitura {
 
