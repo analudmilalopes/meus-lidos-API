@@ -37,10 +37,12 @@ public class LivroModel {
     @Column(name = "editora", nullable = true)
     private String editora;
 
-
     @Column(name = "status_leitura", nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
     private StatusLeitura statusLeitura;
+
+    @Column(name = "nota", nullable = true)
+    private Integer nota;
 
     @ManyToOne
     @JoinColumn(name = "autor_id")
