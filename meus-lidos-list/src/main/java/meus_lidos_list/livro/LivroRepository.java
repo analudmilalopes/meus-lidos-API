@@ -1,4 +1,6 @@
 package meus_lidos_list.livro;
 
-public interface LivroRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LivroRepository extends JpaRepository<LivroModel, Long> {
 }
