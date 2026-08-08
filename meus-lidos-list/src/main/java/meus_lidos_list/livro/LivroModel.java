@@ -1,13 +1,11 @@
 package meus_lidos_list.livro;
 
-import enums.StatusLeitura;
+import meus_lidos_list.enums.StatusLeitura;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import meus_lidos_list.autor.AutorModel;
-
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
