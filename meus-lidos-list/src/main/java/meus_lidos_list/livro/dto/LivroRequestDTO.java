@@ -9,6 +9,7 @@ public record LivroRequestDTO(
         String genero,
         String editora,
         Long autorId,
+        Integer nota,
         StatusLeitura statusLeitura
 ) {
 }
