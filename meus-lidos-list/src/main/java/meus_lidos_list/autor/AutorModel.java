@@ -30,7 +30,7 @@ public class AutorModel {
     @Column(name = "nacionalidade" , nullable = true, length = 15)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor_id")
+    @OneToMany(mappedBy = "autor")
 
     @JsonIgnore
     private List<LivroModel> livros;
