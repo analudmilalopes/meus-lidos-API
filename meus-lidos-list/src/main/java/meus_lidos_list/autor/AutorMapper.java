@@ -19,6 +19,7 @@ public class AutorMapper {
 
     public AutorResponseDTO map(AutorModel autorModel) {
         return  new AutorResponseDTO(
+                autorModel.getId(),
                 autorModel.getNome(),
                 autorModel.getIdade(),
                 autorModel.getNacionalidade()
