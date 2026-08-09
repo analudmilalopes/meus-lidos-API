@@ -11,6 +11,8 @@ public class AutorMapper {
     public AutorModel map(AutorRequestDTO autorDTO) {
         AutorModel autorModel = new AutorModel();
         autorModel.setNome(autorDTO.nome());
+        autorModel.setIdade(autorDTO.idade());
+        autorModel.setNacionalidade(autorDTO.nacionalidade());
 
         return autorModel;
     }
