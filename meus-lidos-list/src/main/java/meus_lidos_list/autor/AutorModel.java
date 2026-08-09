@@ -24,7 +24,7 @@ public class AutorModel {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "idade", nullable = false)
+    @Column(name = "idade", nullable = true  )
     private Integer idade;
 
     @Column(name = "nacionalidade" , nullable = true, length = 15)
