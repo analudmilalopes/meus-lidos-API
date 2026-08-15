@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/livros")
@@ -27,36 +26,23 @@ public class LivroController {
 
     @GetMapping
     public ResponseEntity<List<LivroResponseDTO>> listarLivros() {
-        List<LivroResponseDTO> livros = livroService.listarLivros();
+        return ResponseEntity.ok(livroService.listarLivros());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroResponseDTO> buscarLivroPorId(@PathVariable Long id) {
+        LivroResponseDTO livros = livroService.listarLivrosPorId(id);
         return ResponseEntity.ok(livros);
     }
 
-    @GetMapping
-    public ResponseEntity<?> buscarLivroPorId(@PathVariable Long id) {
-        LivroResponseDTO livros = livroService.listarLivrosPorId(id);
-        if (livros != null) {
-            return ResponseEntity.ok(livros);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Livro nao encontrado!");
-        }
-
-    }
-
-    @GetMapping
+    @GetMapping("autor/{autorId}")
     public ResponseEntity<List<LivroResponseDTO>> buscarLivroPorAutor(@PathVariable Long autorId) {
-        List<LivroResponseDTO> livros = livroService.listarLivrosPorAutorId(autorId);
-        if (!livros.isEmpty()) {
-            return ResponseEntity.ok(livros);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(livros);
-        }
+        return ResponseEntity.ok(livroService.listarLivrosPorAutorId(autorId));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity <LivroResponseDTO> atualizarLivroPorId(@PathVariable Long id, @RequestBody LivroRequestDTO livroDTO) {
-        LivroResponseDTO livros = livroService.alterarLivroPorId(id, livroDTO);
+        LivroResponseDTO livros = livroService.alterarLivroPorId(id,  livroDTO);
 
         return ResponseEntity.ok(livros);
 
