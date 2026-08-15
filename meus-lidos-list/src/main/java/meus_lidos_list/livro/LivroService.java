@@ -28,17 +28,22 @@ public class LivroService {
         AutorModel autor = autorRepository.findById(livroDTO.autorId())
                 .orElseThrow(() ->
                         new ParametroNaoEncontrado("Autor nao encontrado."));
-        LivroModel livro = livroMapper.map(livroDTO);
+
+        LivroModel livro = livroMapper.mapToEntity(livroDTO);
+
         livro.setAutor(autor);
+
         livro = livroRepository.save(livro);
-        return livroMapper.map(livro);
+
+        return livroMapper.mapToResponse(livro);
     }
 
     public List<LivroResponseDTO> listarLivros() {
 
         List<LivroModel> livros = livroRepository.findAll();
+
         return livros.stream()
-                .map(livroMapper::map)
+                .map(livroMapper::mapToResponse)
                 .collect(Collectors.toList());
     }
 
@@ -47,7 +52,7 @@ public class LivroService {
         LivroModel livros = livroRepository.findById(id)
                 .orElseThrow(() -> new ParametroNaoEncontrado("Livro nao encontrado."));
 
-        return livroMapper.map(livros);
+        return livroMapper.mapToResponse(livros);
 
     }
 
@@ -56,24 +61,22 @@ public class LivroService {
         List<LivroModel> livros = livroRepository.findByAutorId(autorId);
 
         return  livros.stream()
-                .map(livroMapper::map)
+                .map(livroMapper::mapToResponse)
                 .collect(Collectors.toList());
     }
 
 
     public LivroResponseDTO alterarLivroPorId (Long id, LivroRequestDTO livroDTO) {
-            LivroModel livros = livroRepository.findById(id)
+
+            LivroModel livrod = livroRepository.findById(id)
                     .orElseThrow(() ->
                             new ParametroNaoEncontrado("Livro nao encontrado."));
 
 
-            LivroModel livroAtualizado = livroMapper.map(livroDTO);
-
-            livroAtualizado.setId(livros.getId());
-            livroAtualizado.setAutor(livros.getAutor());
+            LivroModel livroAtualizado = livroMapper.mapToEntity(livroDTO);
 
             LivroModel livroSalvo = livroRepository.save(livroAtualizado);
 
-            return livroMapper.map(livroSalvo);
+            return livroMapper.mapToResponse(livroSalvo);
         }
     }
