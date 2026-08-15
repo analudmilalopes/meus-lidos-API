@@ -68,7 +68,7 @@ public class LivroService {
 
     public LivroResponseDTO alterarLivroPorId (Long id, LivroRequestDTO livroDTO) {
 
-            LivroModel livrod = livroRepository.findById(id)
+            LivroModel livros = livroRepository.findById(id)
                     .orElseThrow(() ->
                             new ParametroNaoEncontrado("Livro nao encontrado."));
 
