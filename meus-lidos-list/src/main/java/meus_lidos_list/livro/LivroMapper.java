@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class LivroMapper {
 
     private final AutorMapper autorMapper;
-    public LivroModel map(LivroRequestDTO livroDTO) {
+    public LivroModel mapToEntity(LivroRequestDTO livroDTO) {
         LivroModel livroModel = new LivroModel();
         livroModel.setTitulo(livroDTO.titulo());
         livroModel.setIsbn(livroDTO.isbn());
@@ -26,7 +26,7 @@ public class LivroMapper {
     }
 
 
-    public LivroResponseDTO map(LivroModel livroModel) {
+    public LivroResponseDTO mapToResponse(LivroModel livroModel) {
             return new LivroResponseDTO(
                     livroModel.getId(),
                     livroModel.getTitulo(),
