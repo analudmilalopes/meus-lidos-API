@@ -47,10 +47,19 @@ public class AutorController {
         return ResponseEntity.ok(autor);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity <AutorResponseDTO> atualizarAutor(@PathVariable Long id, @RequestBody AutorRequestDTO autorDTO){
+
         AutorResponseDTO autor = autorService.alterarAutorPorId(id, autorDTO);
 
         return ResponseEntity.ok(autor);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity <String> removerAutorPorId(@PathVariable Long id){
+
+        autorService.deletarAutorPorId(id);
+
+        return ResponseEntity.ok("Livro removido!");
     }
 }
