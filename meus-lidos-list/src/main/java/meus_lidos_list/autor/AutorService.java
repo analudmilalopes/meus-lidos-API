@@ -51,14 +51,18 @@ public class AutorService {
 
     public AutorResponseDTO alterarAutorPorId (@PathVariable Long id, AutorRequestDTO autorDTO) {
 
-         autorRepository.findById(id)
+        AutorModel autor =  autorRepository.findById(id)
                 .orElseThrow(() -> new ParametroNaoEncontrado("Autor nao encontrado."));
 
-            AutorModel autorAtualizado = autorMapper.mapToEntity(autorDTO);
+            return autorMapper.mapToResponse(autorRepository.save(autor));
 
-            autorAtualizado = autorRepository.save(autorAtualizado);
+    }
 
-            return autorMapper.mapToResponse(autorAtualizado);
+    public void deletarAutorPorId(@PathVariable Long id){
 
+        AutorModel autor = autorRepository.findById(id)
+                .orElseThrow(() -> new ParametroNaoEncontrado("Autor nao encontrado."));
+
+        autorRepository.delete(autor);
     }
 }
