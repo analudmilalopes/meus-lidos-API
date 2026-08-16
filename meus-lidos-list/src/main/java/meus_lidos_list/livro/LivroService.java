@@ -68,15 +68,11 @@ public class LivroService {
 
     public LivroResponseDTO alterarLivroPorId (Long id, LivroRequestDTO livroDTO) {
 
-            LivroModel livros = livroRepository.findById(id)
-                    .orElseThrow(() ->
-                            new ParametroNaoEncontrado("Livro nao encontrado."));
+        LivroModel livro = livroRepository.findById(id)
+                .orElseThrow(() ->
+                        new ParametroNaoEncontrado("Livro nao encontrado."));
 
 
-            LivroModel livroAtualizado = livroMapper.mapToEntity(livroDTO);
-
-            LivroModel livroSalvo = livroRepository.save(livroAtualizado);
-
-            return livroMapper.mapToResponse(livroSalvo);
-        }
+        return livroMapper.mapToResponse(livroRepository.save(livro));
+    }
     }
