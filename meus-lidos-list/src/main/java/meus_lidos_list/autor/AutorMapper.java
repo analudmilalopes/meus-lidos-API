@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AutorMapper {
 
-    public AutorModel map(AutorRequestDTO autorDTO) {
+    public AutorModel mapToEntity(AutorRequestDTO autorDTO) {
         AutorModel autorModel = new AutorModel();
         autorModel.setNome(autorDTO.nome());
         autorModel.setIdade(autorDTO.idade());
@@ -17,9 +17,8 @@ public class AutorMapper {
         return autorModel;
     }
 
-    public AutorResponseDTO map(AutorModel autorModel) {
+    public AutorResponseDTO mapToResponse(AutorModel autorModel) {
         return  new AutorResponseDTO(
-                autorModel.getId(),
                 autorModel.getNome(),
                 autorModel.getIdade(),
                 autorModel.getNacionalidade()
