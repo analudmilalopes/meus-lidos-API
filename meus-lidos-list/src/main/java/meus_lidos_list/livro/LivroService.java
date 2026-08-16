@@ -7,6 +7,7 @@ import meus_lidos_list.autor.dto.AutorRequestDTO;
 import meus_lidos_list.exception.ParametroNaoEncontrado;
 import meus_lidos_list.livro.dto.LivroRequestDTO;
 import meus_lidos_list.livro.dto.LivroResponseDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,7 @@ public class LivroService {
                 .collect(Collectors.toList());
     }
 
-    public LivroResponseDTO listarLivrosPorId (Long id) {
+    public LivroResponseDTO listarLivrosPorId(Long id) {
 
         LivroModel livros = livroRepository.findById(id)
                 .orElseThrow(() -> new ParametroNaoEncontrado("Livro nao encontrado."));
@@ -60,13 +61,13 @@ public class LivroService {
 
         List<LivroModel> livros = livroRepository.findByAutorId(autorId);
 
-        return  livros.stream()
+        return livros.stream()
                 .map(livroMapper::mapToResponse)
                 .collect(Collectors.toList());
     }
 
 
-    public LivroResponseDTO alterarLivroPorId (Long id, LivroRequestDTO livroDTO) {
+    public LivroResponseDTO alterarLivroPorId(Long id, LivroRequestDTO livroDTO) {
 
         LivroModel livro = livroRepository.findById(id)
                 .orElseThrow(() ->
@@ -74,5 +75,14 @@ public class LivroService {
 
 
         return livroMapper.mapToResponse(livroRepository.save(livro));
+
     }
+
+    public void deletarLivroPorId(Long id) {
+
+        LivroModel livros = livroRepository.findById(id)
+                .orElseThrow(() -> new ParametroNaoEncontrado("Livro nao encontrado."));
+
+            livroRepository.delete(livros);
     }
+}
