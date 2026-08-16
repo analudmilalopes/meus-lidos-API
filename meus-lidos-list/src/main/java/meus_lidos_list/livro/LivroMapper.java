@@ -28,15 +28,44 @@ public class LivroMapper {
 
     public LivroResponseDTO mapToResponse(LivroModel livroModel) {
             return new LivroResponseDTO(
-                    livroModel.getId(),
                     livroModel.getTitulo(),
                     livroModel.getIsbn(),
                     livroModel.getAnoPublicacao(),
                     livroModel.getGenero(),
                     livroModel.getEditora(),
                     livroModel.getStatusLeitura(),
-                    livroModel.getNota(),
-                    autorMapper.map(livroModel.getAutor())
+                    livroModel.getNota()
             );
+    }
+
+    public void update(LivroModel livro, LivroRequestDTO dto) {
+
+        if (dto.titulo() != null) {
+            livro.setTitulo(dto.titulo());
+        }
+
+        if (dto.isbn() != null) {
+            livro.setIsbn(dto.isbn());
+        }
+
+        if (dto.anoPublicacao() != null) {
+            livro.setAnoPublicacao(dto.anoPublicacao());
+        }
+
+        if (dto.genero() != null) {
+            livro.setGenero(dto.genero());
+        }
+
+        if (dto.editora() != null) {
+            livro.setEditora(dto.editora());
+        }
+
+        if (dto.statusLeitura() != null) {
+            livro.setStatusLeitura(dto.statusLeitura());
+        }
+
+        if (dto.nota() != null) {
+            livro.setNota(dto.nota());
+        }
     }
 }
