@@ -1,5 +1,6 @@
 package meus_lidos_list.livro;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import meus_lidos_list.livro.dto.LivroRequestDTO;
 import meus_lidos_list.livro.dto.LivroResponseDTO;
@@ -41,10 +42,11 @@ public class LivroController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity <LivroResponseDTO> atualizarLivroPorId(@PathVariable Long id, @RequestBody LivroRequestDTO livroDTO) {
-        LivroResponseDTO livros = livroService.alterarLivroPorId(id,  livroDTO);
+    public ResponseEntity <LivroResponseDTO> atualizarLivroPorId(@PathVariable Long id, @RequestBody @Valid LivroRequestDTO livroDTO) {
 
-        return ResponseEntity.ok(livros);
+        LivroResponseDTO livroAtualizado = livroService.alterarLivroPorId(id, livroDTO);
+
+        return ResponseEntity.ok(livroAtualizado);
 
     }
 }
